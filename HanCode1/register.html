@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生信息注册</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <style>
+    .my-text {
+      letter-spacing: normal;
+    }
+    </style>
+  <div class="my-text" id="StuInfo">
+    <h3>请输入学生信息：</h3>
+    <form @submit.prevent="submitForm">
+      <div>
+        <label >姓    名：{{student.name}}</label>
+      </div>
+      <div>
+        <label>学    号：{{student.snum}}</label>
+      </div>
+      <div>
+          <label for="age">年    龄:</label>
+          <input type="number" id="age" v-model="student.age" required min="1" max="99" pattern="\d+">
+      </div>
+      <div>
+          <label for="birthYear">出生日期:</label>
+          <input type="text" id="birthYear" v-model="student.birthYear" required pattern="\d{4}">
+          年
+      </div>
+      
+      <div>
+          <label for="sid">身份证号:</label>
+          <input type="text" id="sid" v-model="student.sid" required pattern="\d{17}[\dXx]">
+      </div>
+      <div>
+          <label for="addr">家庭住址:</label>
+          <input type="text" id="addr" v-model="student.addr" required maxlength="50" pattern="[\u4e00-\u9fa5a-zA-Z0-9]+">
+      </div>
+      <div>
+        <label for="sex">性    别:</label>
+        <input type="radio" id="sex1" name="sex" value="m" >
+        <label for="sex1">男</label>
+        <input type="radio" id="sex2" name="sex" value="f" >
+        <label for="sex2">女</label>
+      </div>
+      <div>
+          <label for="class">班    级:</label>
+          <select id="class" v-model="student.class" required>
+            <option value="">--请选择--</option>
+            <option value="计科2001">计科2001</option>
+            <option value="计科2011">计科2011</option>
+            <option value="计科2012">计科2012</option>
+            <option value="计科2013">计科2013</option>
+            <option value="计科2014">计科2014</option>
+            <option value="计科2015">计科2015</option>
+          </select>
+      </div>
+      <div>
+          <label for="course">课    程:</label>
+          <input type="checkbox" id="计算机网络" name="course" >
+          <label for="计算机网络">计算机网络</label>
+          <input type="checkbox" id="数据库原理" name="course" >
+          <label for="数据库原理">数据库原理</label>
+          <input type="checkbox" id="J2EE程序设计" name="course" >
+          <label for="J2EE程序设计">J2EE程序设计</label>
+          <input type="checkbox" id="Java程序设计" name="course" >
+          <label for="Java程序设计">Java程序设计</label>
+          
+      </div>
+      <div>
+          <label for="interest">兴    趣:</label>
+          <textarea id="interest" v-model="student.interest" required maxlength="200" rows="3" cols="30" pattern="[\u4e00-\u9fa5a-zA-Z\s\p{P}]+"></textarea>
+      </div>
+      <button type="submit">提交</button>
+      <button type="reset">重置</button>
+  </form>
+
+</div>
+  <script>
+    var vm = new Vue({
+      el:'#StuInfo',
+      data:{
+        student:{
+          name:'韩津晶',
+          snum:'0504200208',
+          age:'',
+          birthYear:'',
+          sid:'',
+          addr:'',
+          sex:'',
+          class:'',
+          course:'',
+          interest:''
+        }
+      },
+      methods: {
+          submitForm() {
+              // 在这里处理表单提交逻辑
+              console.log(this.student);
+          }
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主页</title>
+  <script src="vue.js"></script>
+  <script src="jquery-1.8.0.min.js"></script>
+
+  <style>
+    #app {
+      width: 300px;
+      margin: 0px auto;
+      background-color: #efeff4;
+      height: 650px;
+    }
+
+    .header {
+      background-color: #26a2ff;
+      color: #fff;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .looppic {
+      width: 300px;
+      height: 160px;
+      margin: 0px auto;
+    }
+
+    .name_pwd {
+      height: 40px;
+      margin: 20px;
+      background-color: #fff;
+      line-height: 40px;
+      padding-left: 20px;
+    }
+
+    .imgBox {
+      border-top: 2px solid cadetblue;
+      width: 100%;
+      height: 250px;
+      margin: 0 auto;
+
+    }
+
+    .white_back {
+      background-color: #fff;
+
+
+
+
+      position: fixed;
+      width: 300px;
+      top: 190px;
+
+
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      float: left;
+      margin: 5px 25px;
+    }
+
+    .menu-item img {
+      width: 50px;
+      height: 50px;
+    }
+
+    
+
+    .imgBox img {
+      width: 100%;
+      height: 250px;
+      margin: 0 auto;
+      padding-top: 30px;
+
+    }
+
+    .bottom-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: fixed;
+      width: 300px;
+      top: 600px;
+      background-color: #fff;
+      padding: 10px 0;
+    }
+
+    .bmenu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bmenu-item img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .bmenu-item span {
+      margin-top: 4px;
+    }
+
+    .img1 {
+      display: block;
+    }
+
+    .img2 {
+      display: none;
+    }
+
+    .img3 {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="header">首页</div>
+
+    <div>
+      <img class="img-slide img1 looppic "
+        src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/51a9f9975be5cc0e99e52ba8e055c6d0.jpg">
+      <img class="img-slide img2 looppic"
+        src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/e21a4de87360bc2f354529920444a0f0.jpg">
+      <img class="img-slide img3 looppic"
+        src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/eef7e476a7422fecd637217d85d77f68.jpg">
+    </div>
+
+    <div class="white_back">
+
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu1.png"> </a>
+        <div>首页</div>
+      </div>
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu2.png"> </a><div>首页</div>
+      </div>
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu3.png"> </a><div>首页</div>
+      </div>
+
+
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu4.png"> </a></a><div>首页</div>
+      </div>
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu5.png"> </a></a><div>首页</div>
+      </div>
+      <div class="menu-item">
+        <a href="./student.html"><img src="img/menu6.png"> </a></a><div>首页</div>
+      </div>
+    </div>
+
+  
+  
+
+  <div class="bottom-menu">
+    <div class="bmenu-item">
+      <a href="./student.html"><img src="img/menu1.png"> </a>
+      <span>首页</span>
+    </div>
+    <div class="bmenu-item">
+      <a href="./student.html"><img src="img/menu2.png"> </a>
+      <span>分类</span>
+    </div>
+    <div class="bmenu-item">
+      <a href="./student.html"><img src="img/menu1.png"> </a>
+      <span>购物车</span>
+    </div>
+    <div class="bmenu-item">
+      <a href="./student.html"><img src="img/menu1.png"> </a>
+      <span>我的</span>
+    </div>
+  </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          student: {
+            name: '',
+            snum: 'test',
+            pwd: '123456'
+          },
+          return{
+            imgList: []
+          }
+        },
+        methods: {
+          getImgList() {
+            this.$indicator.open({
+              text: '加载中'
+            })
+            this.$http.get('imglist').then(res => {
+              this.$indicator.close()
+              if (res.data.code === 0) {
+                this.$toast('加载轮播图失败')
+              } else {
+                this.imgList = res.data.data
+              }
+            })
+          },
+          loopPic() {
+            $.ajax(imglistsettings).done(function (response) {
+              // 在这里处理接收到的图片
+              return (this.imgList = response.data.data.img);
+              console.log(response);
+            });
+          }
+        }
+      })
+      const imglistsettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://vue.tutestudio.net/api/imglist",
+        "method": "GET",
+        "headers": {}
+      };
+    </script>
+
+    <script>
+      var index = 0;
+      function ChangeImg() {
+        index++;
+        var a = document.getElementsByClassName("img-slide");
+        if (index >= a.length) index = 0;
+        for (var i = 0; i < a.length; i++) {
+          a[i].style.display = 'none';
+        }
+        a[index].style.display = 'block';
+      }
+      //设置定时器，每隔两秒切换一张图片
+      setInterval(ChangeImg, 3000);
+
+
+
+    </script>
+  </div>
+</body>
+
+</html>

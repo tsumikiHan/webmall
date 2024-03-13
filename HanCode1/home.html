@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主页</title> 
+  <script src="vue.js"></script>
+  <script src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+  <style>
+    #app{
+      width: 300px;
+      margin:0px auto;
+      background-color: #efeff4;
+      height: 700px;
+    }
+    .looppic{
+      width: 240px;
+      height: 130px;
+      margin: 20px;
+    }
+    .header{
+      color: #fff;
+      text-align: center;
+      background-color: cadetblue;
+      height: 40px;
+      line-height: 40px;
+    }
+    .name_pwd{
+        height: 40px;
+        margin: 20px;
+        background-color: #fff;
+        line-height: 40px;
+        padding-left: 20px;
+    }
+    .white_back {
+        background-color: #fff;
+        border: none;
+      }
+        
+    .imgBox{
+            border-top: 2px solid cadetblue;
+            width: 100%;
+            height: 250px;
+            margin: 0 auto;
+
+        }
+
+        .imgBox img{
+            width: 100%;
+            height: 250px;
+            margin: 0 auto;
+            padding-top: 30px;
+
+        }
+        .img1{
+            display: block;
+        }
+        .img2{
+            display: none;
+        }
+        .img3{
+            display: none;
+        }
+        img {
+            width: 60px;
+            height: 60px;
+        }
+        .bottom-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            width: 350px;
+            top: 590px;
+            background-color: #efeff4;
+            padding: 10px 0;
+        }
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item img {
+            width: 40px;
+            height:40px;
+        }
+
+        .menu-item span {
+            margin-top: 4px;
+        }
+
+  </style>
+</head>
+
+<body>
+  
+  <div id="app">
+    <div class="header">主页</div>
+    <div>
+      <img  class="img-slide img1 looppic " src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/51a9f9975be5cc0e99e52ba8e055c6d0.jpg">
+      <img class="img-slide img2 looppic" src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/e21a4de87360bc2f354529920444a0f0.jpg">
+      <img class="img-slide img3 looppic" src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/eef7e476a7422fecd637217d85d77f68.jpg">
+      
+    </div>
+    <div>
+      <ul class="white_back">
+        <div class="img">
+            <a href="http://www.php.cn"><img src="img/menu1.png"> </a>
+            <a href="http://www.php.cn"><img src="img/menu2.png"> </a>
+            <a href="http://www.php.cn"><img src="img/menu3.png"> </a>
+            <p>新闻资讯 图片分享 商品购买</p>
+        </div>
+        <div class="img">
+            <a href="http://www.php.cn"><img src="img/menu4.png"> </a>
+            <a href="http://www.php.cn"><img src="img/menu5.png"> </a>
+            <a href="http://www.php.cn"><img src="img/menu6.png"> </a>
+            <p>留言反馈 视频专区 联系我们</p>
+        </div>
+    </ul>
+
+    </div>
+    <div class="bottom-menu">
+      <div class="menu-item">
+          <img src="img/home.png" alt="Icon 1">
+          <span>首页</span>
+      </div>
+      <div class="menu-item">
+          <img src="img/menu2.png" alt="Icon 2">
+          <span>分类</span>
+      </div>
+      <div class="menu-item">
+          <img src="img/shopping.png" alt="Icon 3">
+          <span>购物车</span>
+      </div>
+      <div class="menu-item">
+          <img src="img/my.png" alt="Icon 4">
+          <span>我的</span>
+      </div>
+  </div>
+
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        student:{
+          name:'',
+          snum:'test',
+          pwd:'123456'
+        }
+      },
+      methods: {
+      }
+    })
+    const imglistsettings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://vue.tutestudio.net/api/imglist",
+      "method": "GET",
+      "headers": {}
+    };
+  </script>
+
+<script>
+    var index=0;
+    function ChangeImg() {
+        index++;
+        var a=document.getElementsByClassName("img-slide");
+        if(index>=a.length) index=0;
+        for(var i=0;i<a.length;i++){
+            a[i].style.display='none';
+        }
+        a[index].style.display='block';
+    }
+    //设置定时器，每隔两秒切换一张图片
+    setInterval(ChangeImg,3000);
+    
+
+    
+  </script>
+</body>
+</html>

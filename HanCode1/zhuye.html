@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <script src="vue.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+
+    <style>
+        #app {
+            width: 350px;
+            margin: 0px auto;
+            background-color: #efeff4;
+            height: 600px;
+        }
+
+        .header {
+            background-color: cornflowerblue;
+            color: #fff;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .back-link {
+            padding-left: 20px;
+            margin-right: 10px;
+        }
+
+        .bottom-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            width: 350px;
+            top: 590px;
+            background-color: #efeff4;
+            padding: 10px 0;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item img {
+            width: 40px;
+            height:40px;
+        }
+
+        .menu-item span {
+            margin-top: 4px;
+        }
+
+        .img1 {
+            display: block;
+        }
+
+        .img2 {
+            display: none;
+        }
+
+        .img3 {
+            display: none;
+        }
+
+        .img4 {
+            margin-top: 150px;
+            background-color: white;
+            margin: 0;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <div class="header">首页</span></div>
+        
+        <img class="img-slide img1 looppic "
+            src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/51a9f9975be5cc0e99e52ba8e055c6d0.jpg"
+            style=" width:350px;margin: 0px auto;">
+        <img class="img-slide img2 looppic"
+            src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/e21a4de87360bc2f354529920444a0f0.jpg"
+            style=" width:350px;margin: 0px auto;">
+        <img class="img-slide img3 looppic"
+            src="http://vue.tutestudio.net/static/uploads/goods/swiper/2019/09/17/eef7e476a7422fecd637217d85d77f68.jpg"
+            style=" width:350px;margin: 0px auto;">
+            <div id="img4" class="img4">
+                <div>
+                    <input type="image" src="assets/images/menu1.png"
+                        style="width:60px; height: 60px; padding-left: 20px;" />
+                    <input type="image" src="assets/images/menu2.png"
+                        style="width:60px; height: 60px; padding-left: 30px;" />
+                    <input type="image" src="assets/images/menu3.png"
+                        style="width:60px; height: 60px; padding-left: 30px;" />
+                    <span>
+                        <input type="button" value="新闻资讯" @click="news()"
+                            style="padding-left:20px; border: 0px; background-color:white;" />
+                        <input type="button" value="图片分享" @click="img()"
+                            style=" padding-left:30px; border: 0px; background-color:white;" />
+                        <input type="button" value="商品购买" @click="shop()"
+                            style="padding-left:30px; border: 0px; background-color:white;" />
+                    </span>
+                </div>
+                <div>
+                    <input type="image" src="assets/images/menu4.png"
+                        style="margin-top: 15px; width:60px; height: 60px; padding-left: 20px;" />
+                    <input type="image" src="assets/images/menu5.png"
+                        style="margin-top: 15px; width:60px; height: 60px; padding-left: 30px;" />
+                    <input type="image" src="assets/images/menu6.png"
+                        style="margin-top: 15px; width:60px; height: 60px; padding-left: 30px;" />
+                    <span>
+                        <input type="button" value="留言反馈" @click="massge()"
+                            style="padding-left:20px; border: 0px; background-color:white;" />
+                        <input type="button" value="视频专区" @click="vedio()"
+                            style=" padding-left:30px; border: 0px; background-color:white;" />
+                        <input type="button" value="联系我们" @click="rela()"
+                            style="padding-left:30px; border: 0px; background-color:white;" />
+                    </span>
+                </div>
+    
+            </div>
+
+        <div class="bottom-menu">
+            <div class="menu-item">
+                <img src="assets/images/home.png" alt="Icon 1">
+                <span>首页</span>
+            </div>
+            <div class="menu-item">
+                <img src="assets/images/menu2.png" alt="Icon 2">
+                <span>分类</span>
+            </div>
+            <div class="menu-item">
+                <img src="assets/images/shopping.png" alt="Icon 3">
+                <span>购物车</span>
+            </div>
+            <div class="menu-item">
+                <img src="assets/images/my.png" alt="Icon 4">
+                <span>我的</span>
+            </div>
+        </div>
+
+        <div>
+            <script>
+                var vm = new Vue({
+                    el: '#app',
+                    data: {
+                        student: {
+                            name: '',
+                            snum: 'test',
+                            pwd: '123456'
+                        },
+                        return {
+                            imgList: []
+                        }
+                    },
+                    methods: {
+                        getImgList() {
+                            this.$indicator.open({
+                                text: '加载中'
+                            })
+                            this.$http.get('imglist').then(res => {
+                                this.$indicator.close()
+                                if (res.data.code === 0) {
+                                    this.$toast('加载轮播图失败')
+                                } else {
+                                    this.imgList = res.data.data
+                                }
+                            })
+                        },
+                        loopPic() {
+                            $.ajax(imglistsettings).done(function (response) {
+                                // 在这里处理接收到的图片
+                                return (this.imgList = response.data.data.img);
+                                console.log(response);
+                            });
+                        }
+                    }
+                })
+                const imglistsettings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://vue.tutestudio.net/api/imglist",
+                    "method": "GET",
+                    "headers": {}
+                };
+            </script>
+
+            <script>
+                var index = 0;
+                function ChangeImg() {
+                    index++;
+                    var a = document.getElementsByClassName("img-slide");
+                    if (index >= a.length) index = 0;
+                    for (var i = 0; i < a.length; i++) {
+                        a[i].style.display = 'none';
+                    }
+                    a[index].style.display = 'block';
+                }
+                //设置定时器，每隔两秒切换一张图片
+                setInterval(ChangeImg, 3000);
+
+
+
+            </script>
+</body>
+
+</html>

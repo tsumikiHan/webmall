@@ -1,0 +1,10 @@
+6.25update
+1.增加login页面主功能
+2.增加jquery-1.8.0.min.js
+3.空壳home页面
+4.测试login-test.js页面跳转与超链接
+6.26update
+1.改用百度链接实现jquery
+2.优化提示
+3.实现超链接
+4.微调布局

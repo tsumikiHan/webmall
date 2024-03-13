@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录</title> 
+  <script src="vue.js"></script>
+  <script src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+  <script src="jquery-1.8.0.min.js"></script>
+
+  <style>
+    #app{
+      width: 300px;
+      margin:0px auto;
+      background-color: #efeff4;
+      height: 700px;
+    }
+    .header{
+      background-color: cornflowerblue;
+      color: #fff;
+      padding-left: 130px;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .header_back{
+      background-color: cornflowerblue;
+      color: #fff;
+      height: 40px;
+      line-height: 40px;
+      padding-left: 10px;
+    }
+    
+    .name_pwd{
+      height: 40px;
+      margin: 20px;
+      background-color: #fff;
+      line-height: 40px;
+      padding-left: 20px;
+    }
+    .name_pwd_input{
+        border: 0px solid #efeff4;
+
+    }
+    .login_btn{
+      text-align: center;
+      margin: 20px;
+    }
+    .login_btn_input{
+      background-color: #007aff;
+      width: 95%;
+      color: #fff;
+      height: 40px;
+      border: 0px solid #efeff4;
+    }
+    .msg{
+      background-color: #007aff;
+    }
+    .tip_href{
+      line-height: 20px;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="app">
+    <div class="header_back" style="float:left;" ><a href="home.html">返回</a></div>
+    
+    <div class="header">登录</div>
+
+    
+
+    <div class="name_pwd">账号
+      <input type="text"  v-model="student.snum" required placeholder="请输入账号" class="name_pwd_input"></input>
+    </div>
+
+    <div class="name_pwd">密码
+      <input type="text"  v-model="student.pwd" required placeholder="请输入密码" class="name_pwd_input"></input>
+    </div>
+
+    <div class="login_btn">
+      <input type="button" value="登录" class="login_btn_input" @click="login">
+    </div>
+
+    <div class="tip_href"> 
+      <p>未找到账号？点此<a href='register.html'>注册</a></p>
+    </div>
+
+  </div>
+  <script>
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        student:{
+          name:'zhangshan',
+          snum:'',
+          pwd:''
+        }
+      },
+      methods: {
+        login(){
+          console.log('执行登录操作')
+          console.log(this.student.snum)
+          console.log(this.student.pwd)
+          $.post('http://vue.tutestudio.net/api/login',{username:this.student.snum,password:this.student.pwd},function(response){
+            console.log(response)
+            if(response.code==0){
+                alert(response.msg)
+                //$(".msg").html(response.msg)
+                return;
+            }
+            else{
+                location.href='home.html'
+            }
+          });
+        },
+        submitForm() {
+            // 在这里处理表单提交逻辑
+            console.log(this.student);
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>信息</title> 
+  <script src="vue.js"></script>
+  <script src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+  <style>
+    #app{
+      width: 300px;
+      margin:0px auto;
+      background-color: #efeff4;
+      height: 700px;
+    }
+    .header{
+      background-color: cornflowerblue;
+      color: #fff;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+    }
+    .name_pwd{
+        height: 40px;
+        margin: 20px;
+        background-color: #fff;
+        line-height: 40px;
+        padding-left: 20px;
+    }
+    .name_pwd_input{
+        border: 0px;
+    }
+    .login_btn{
+      text-align: center;
+      margin: 20px;
+    }
+    .login_btn_input{
+      background-color: #007aff;
+      width: 95%;
+      color: #fff;
+      height: 40px;
+      border: 1px solid #efeff4;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div id="app">
+    <div class="header">登录</div>
+
+    <div class="name_pwd">账号
+      <input type="text" placeholder="请输入账号"></input>
+    </div>
+
+    <div class="name_pwd">密码
+      <input type="text" placeholder="请输入密码" ></input>
+    </div>
+
+    <div class="login_btn">
+      <input type="button" value="登录" class="login_btn_input">
+    </div>
+
+  </div>
+  <script>
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        student:{
+          name:'韩津晶',
+          snum:'0504200208',
+          pwd:''
+        }
+      },
+      methods: {
+          submitForm() {
+              // 在这里处理表单提交逻辑
+              console.log(this.student);
+          }
+      }
+    })
+
+  </script>
+</body>
+</html>
